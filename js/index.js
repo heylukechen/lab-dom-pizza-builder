@@ -2,11 +2,11 @@
 
 // Constants
 const basePrice = 10;
-const pepperoniPrice = 1;
-const mushRoomPrice = 1;
-const greenPeppersPrice = 1;
-const whiteSourcePrice = 3;
-const glutenFreePrice = 5;
+let pepperoniPrice = 1;
+let mushRoomPrice = 1;
+let greenPeppersPrice = 1;
+let whiteSourcePrice = 3;
+let glutenFreePrice = 5;
 
 const ingredients = {
   pepperoni: { name: 'pepperoni', price: 1 },
@@ -122,54 +122,62 @@ function renderButtons() {
 }
 
 function renderPrice() {
-  
-  let priceContent = document.querySelector(
-    '.panel.price span'
-  ).textContent;
-  console.log(priceContent);
-  
+  //get the current price which is the base price plus peperoni, green pepper and mushroom
+  //where the state of peperoni, gree pepper and mushroom are all set to "true", we add them
+  // if the state of one one of them are
+
   let priceLists = document.querySelector('.panel.price ul');
 
   if (state.pepperoni) {
     priceLists.querySelector('li:first-child').style.display = 'block';
-
+    pepperoniPrice = 1;
   } else {
     priceLists.querySelector('li:first-child').style.display = 'none';
- 
+    pepperoniPrice = 0;
   }
 
   if (state.mushrooms) {
     priceLists.querySelector('li:nth-child(2)').style.display = 'block';
- 
+    mushRoomPrice = 1;
   } else {
     priceLists.querySelector('li:nth-child(2)').style.display = 'none';
-  
+    mushRoomPrice = 0;
   }
 
   if (state.greenPeppers) {
     priceLists.querySelector('li:nth-child(3)').style.display = 'block';
-
+    greenPeppersPrice = 1;
   } else {
     priceLists.querySelector('li:nth-child(3)').style.display = 'none';
-    
+    greenPeppersPrice = 0;
   }
 
   if (state.whiteSauce) {
     priceLists.querySelector('li:nth-child(4)').style.display = 'block';
- 
-  
+    whiteSourcePrice = 3 ;
   } else {
     priceLists.querySelector('li:nth-child(4)').style.display = 'none';
-    
+    whiteSourcePrice = 0;
   }
 
   if (state.glutenFreeCrust) {
-    priceLists.querySelector('li:nth-child(5)').style.display = 'block'; 
-  
+    priceLists.querySelector('li:nth-child(5)').style.display = 'block';
+    glutenFreePrice = 5;
   } else {
     priceLists.querySelector('li:nth-child(5)').style.display = 'none';
-
+    glutenFreePrice = 0;
   }
+
+  let currentPrice =
+    basePrice +
+    pepperoniPrice +
+    mushRoomPrice +
+    greenPeppersPrice +
+    whiteSourcePrice +
+    glutenFreePrice;
+
+  let priceContent = document.querySelector('.panel.price strong span');
+  priceContent.textContent = `${currentPrice}`;
 
   // console.log(priceLists, typeof priceLists);
   // Iteration 4: change the HTML of `<aside class="panel price">`
